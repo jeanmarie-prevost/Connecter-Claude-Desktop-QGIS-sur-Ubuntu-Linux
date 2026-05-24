@@ -3,7 +3,7 @@
 *✍️ * *Rédigé par Jean-Marie Prévost - Géomaticien, Seine-et-Marne*  
  *  
  📅 * *Configuration validée en mai 2026 sur Ubuntu 22.04 / QGIS 3.34.4 "Prizren"*  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSPBCUZfEnoYmFDBhAU2QtIq6DIzW7UHAMBfnGt1V8fXEwAAXrse/wcF74lXkIsAAAAASUVORK5CYII=)  
+![] 
 **🧭 Avant de commencer - Comprendre ce qu'on va faire**  
 Imaginez que QGIS est un atelier de cartographie, et que Claude est un assistant très compétent.  
    
@@ -11,7 +11,7 @@ Imaginez que QGIS est un atelier de cartographie, et que Claude est un assistant
 Ce guide explique comment construire un **pont de communication** entre les deux, appelé  **MCP** (*Model Context Protocol*). Une fois ce pont en place, je peux dire à Claude, en français naturel :  
 *"Crée une couche de points en Lambert 93 et applique-lui une symbologie rouge"*  
 Et Claude le fait **directement dans mon QGIS ouvert**, en temps réel. ✨  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAM0lEQVR4nO3OUQmAQBBAwSdcjsu6HYxoDsEK/okwk2COmdnVGQAAf3GtalX76wkAAK/dDxFWBDkFf6+SAAAAAElFTkSuQmCC)  
+![]
 **📋 Ce dont j'ai besoin**  
 Avant de commencer, je vérifie que j'ai bien :  
 | | |  
@@ -24,7 +24,7 @@ Avant de commencer, je vérifie que j'ai bien :
 | Connexion internet | Pour télécharger les outils |   
 | Un compte Anthropic (claude.ai) | Pour se connecter à Claude Desktop |   
    
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OMQ2AABAAsSNBACPiUML0NpGACyywEZJWQZeZ2aszAAD+4l6rrTq+ngAA8Nr1AL/SBEZwuCSwAAAAAElFTkSuQmCC)  
+![] 
 **🏗️ Architecture - Comment ça marche**  
 ┌─────────────────────────────────────────────────────────────┐  
  │                                                             │  
@@ -38,7 +38,7 @@ Il y a **4 composants** à installer :
 2. **uv** - un gestionnaire de paquets Python ultra-rapide (requis par le plugin)  
 3. **Le plugin QGIS MCP** - qui ouvre un serveur dans QGIS  
 4. **Le fichier de configuration** - qui dit à Claude Desktop comment trouver QGIS  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSNBCUrfDqrYGVDAgAU2QtIq6DIzW7UHAMBfHGt1V+fXEwAAXrseHCQGBEuErVgAAAAASUVORK5CYII=)  
+![] 
 **🔧 ÉTAPE 1 - Installer Claude Desktop**  
 *⚠️ * ***Important :*** * Anthropic ne fournit pas officiellement Claude Desktop pour Linux.*  
  *  
@@ -67,7 +67,7 @@ claude-desktop --doctor
 claude-desktop  
    
 Je me connecte avec mon compte Anthropic (celui de claude.ai).  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSNBCUrfD6LYGNDAgAU2QtIq6DIzW7UHAMBfHGt1V+fXEwAAXrseHDAF/orRG+cAAAAASUVORK5CYII=)  
+![] 
 **🔧 ÉTAPE 2 - Installer **uv  
 uv est un outil Python nécessaire pour que le plugin QGIS MCP fonctionne.  
    
@@ -87,7 +87,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
  source ~/.bashrc  
    
 *💡 * ***Pourquoi ?*** * QGIS ne charge pas automatiquement le PATH du terminal. Cette ligne garantit que QGIS trouve * *uv* * à chaque démarrage.*  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OQQmAABRAsSfYxZo/kSGMYQLPJrCCNxG2BFtmZquOAAD4i3Ot7mr/egIAwGvXA4qrBdGuSdJuAAAAAElFTkSuQmCC)  
+![]  
 **🔧 ÉTAPE 3 - Installer le plugin QGIS MCP**  
 Le plugin QGIS MCP crée un serveur à l'intérieur de QGIS qui écoute les commandes de Claude.  
    
@@ -108,7 +108,7 @@ ln -s ~/qgis-mcp/qgis_mcp_plugin \
 ls ~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/  
    
 ✅ Je dois voir qgis_mcp_plugin dans la liste.  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSNhZscZXlheJwqQgQU2QtIq6DIze3UGAMBf3Gu1VcfXEwAAXrseop8EQrmJduIAAAAASUVORK5CYII=)  
+![]  
 **🔧 ÉTAPE 4 - Activer le plugin dans QGIS**  
 **4.1 - Lancer QGIS depuis le terminal (obligatoire !)**  
 *⚠️ * ***Point critique :*** * Je dois toujours lancer QGIS depuis le terminal avec cette commande, pas depuis l'icône du bureau. Cela garantit que QGIS voit * *uv* * dans son environnement.*  
@@ -133,7 +133,7 @@ Je dois voir les 4 cases en vert :
 *🔴 * ***Si *** ***uv Installation*** *** est en rouge :*** * Cliquer sur * ***"Setup Environment"*** * puis * ***"Refresh Checklist"*** *.*  
  *  
  Si toujours rouge, voir la section Dépannage en fin de guide.*  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OQQmAABRAsSd4NIGBzPXBmAawhhW8ibAl2DIze3UGAMBf3Gu1VcfXEwAAXrsehaQEN+8fLHEAAAAASUVORK5CYII=)  
+![] 
 **🔧 ÉTAPE 5 - Configurer la connexion Claude ↔ QGIS**  
 **5.1 - Écrire le fichier de configuration**  
 Je colle ce bloc complet dans le terminal :  
@@ -170,7 +170,7 @@ cat ~/.config/Claude/claude_desktop_config.json
    
 ✅ Je dois voir la section mcpServers avec qgis à l'intérieur.  
 *💡 * ***Si j'ai déjà des préférences dans ce fichier*** *, je dois les conserver et ajouter uniquement la section * *mcpServers* * à la fin, avant le dernier * *}* *.*  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OQQmAABRAsSd4NIGRTPXNaQBrWMGbCFuCLTOzV2cAAPzFvVZbdXw9AQDgtesBhZQEOYZGgUEAAAAASUVORK5CYII=)  
+![]  
 **🔧 ÉTAPE 6 - Démarrer le serveur QGIS**  
 **6.1 - Démarrer via le bouton MCP (méthode normale)**  
 Dans QGIS, cliquer sur le bouton **MCP** →  **"Start Server"**  
@@ -184,7 +184,7 @@ from qgis.utils import plugins
  print("Serveur démarré !")  
    
 ✅ La console affiche : Serveur démarré !  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OQQmAABRAsSfYxKK/kYXEkyk8WcGbCFuCLTOzVXsAAPzFuVZ3dXw9AQDgtesB/v8F8JQadPwAAAAASUVORK5CYII=)  
+![] 
 **🔧 ÉTAPE 7 - Connecter Claude Desktop**  
 **7.1 - Relancer Claude Desktop**  
 # Fermer Claude Desktop  
@@ -199,7 +199,7 @@ from qgis.utils import plugins
 **7.2 - Vérifier que les outils QGIS sont disponibles**  
 En bas de la fenêtre de chat de Claude Desktop, je dois voir une icône **🔨 outils** avec un nombre (ex: *51 tools*).  
 *🔴 * ***Si l'icône n'apparaît pas :*** * Vérifier que le serveur QGIS est démarré (étape 6), puis relancer Claude Desktop.*  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OMQ2AABAAsSNhRAF6EPYDLhGADSywEZJWQZeZ2aszAAD+4l6rrTq+ngAA8Nr1AIWsBDYDm5cLAAAAAElFTkSuQmCC)  
+![]  
 **✅ TEST FINAL - La connexion fonctionne !**  
 Dans **Claude Desktop**, je tape ce message :  
 Ping QGIS et dis-moi la version installée et le système d'exploitation.  
@@ -207,7 +207,7 @@ Ping QGIS et dis-moi la version installée et le système d'exploitation.
 ✅ Claude doit répondre quelque chose comme :  
 *"QGIS est bien installé et répond. La version détectée est QGIS 3.34.4 "Prizren"."*  
 **🎉 Félicitations ! Claude pilote QGIS en direct.**  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OMQ2AABAAsSPBCj5fFgpQwYwEZiywEZJWQZeZ2ao9AAD+4lyruzq+ngAA8Nr1AMTRBeEgNK9YAAAAAElFTkSuQmCC)  
+![] 
 **🚀 Premiers prompts à essayer**  
 Une fois la connexion établie, voici des exemples de ce que je peux dire à Claude Desktop :  
 Dans QGIS, crée une couche point temporaire nommée "test"   
@@ -224,7 +224,7 @@ Dans QGIS, applique une symbologie rouge semi-transparente
    
 Dans QGIS, sauvegarde le projet sous ~/Documents/mon_projet.qgz  
    
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OQQmAABRAsSd40A5GMORPYEt7WMGbCFuCLTNzVFcAAPzFvVZbdX49AQDgtf0BSrIDUgOg4eAAAAAASUVORK5CYII=)  
+![]  
 **🔄 Procédure de démarrage quotidien**  
 À chaque session, je suis cet ordre :  
 1️⃣  Terminal → export PATH="$HOME/.local/bin:$PATH" && qgis &  
@@ -232,7 +232,7 @@ Dans QGIS, sauvegarde le projet sous ~/Documents/mon_projet.qgz
  3️⃣  Claude Desktop → vérifier l'icône 🔨  
  4️⃣  C'est parti !  
    
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OMQ2AABAAsSNBACPykMH4NpGACyywEZJWQZeZ2aszAAD+4l6rrTo+jgAA8N71AL/CBEiG5xPoAAAAAElFTkSuQmCC)  
+![]  
 **🛠️ Dépannage - Les problèmes courants**  
 **❌ **uv ** introuvable dans QGIS**  
 # Vérifier que uv est installé  
@@ -277,7 +277,7 @@ import socket
      s.close()  
    
 Si le port est occupé, redémarrer QGIS.  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSPBCUZfE2IYmVDBhAU2QtIq6DIzW7UHAMBfnGt1V8fXEwAAXrse/xcF7U7sx4wAAAAASUVORK5CYII=)  
+![]  
 **📚 Sources et références**  
 | | |  
 |-|-|  
@@ -288,7 +288,7 @@ Si le port est occupé, redémarrer QGIS.
 | Documentation MCP Anthropic | [https://docs.anthropic.com/mcp](https://docs.anthropic.com/mcp "https://docs.anthropic.com/mcp") |   
 | Documentation PyQGIS | [https://docs.qgis.org/latest/fr/docs/pyqgis_developer_cookbook](https://docs.qgis.org/latest/fr/docs/pyqgis_developer_cookbook "https://docs.qgis.org/latest/fr/docs/pyqgis_developer_cookbook") |   
    
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OYQ1AABSAwY9JoICqL4Z8Ikiggn9mu0twy8wc1RkAAH9xbdVa7V9PAAB47X4A9CgEJQFjJ/EAAAAASUVORK5CYII=)  
+![] 
 **ℹ️ Notes importantes**  
 *🔔 * ***Claude Desktop sur Linux n'est pas officiel.*** * Anthropic supporte officiellement Claude Desktop uniquement sur macOS et Windows. Le paquet * *.deb* * utilisé ici est maintenu par la communauté.*  
 *🔔 * ***Sécurité.*** * Le plugin MCP permet à Claude d'exécuter du code Python directement dans QGIS. Ne l'utiliser que sur des projets de confiance.*  
@@ -296,7 +296,7 @@ Si le port est occupé, redémarrer QGIS.
 *cd ~/qgis-mcp && git pull  
  *  
 *Puis redémarrer QGIS.*  
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OQQmAABRAsScYxpg/jFnsYARvRrCCNxG2BFtmZquOAAD4i3Ot7mr/egIAwGvXA22QBcposvV4AAAAAElFTkSuQmCC)  
+![]
 *© Jean-Marie Prévost *  
    
  *Configuration testée et validée : Ubuntu Linux, QGIS 3.34.4 "Prizren", uv 0.11.16, mai 2026*  
